@@ -16,6 +16,12 @@ class CostModelConfig():
     distruct_time = float("inf")
     model_name = 'cost_model'
     
+class OscModelConfig():
+    IDLE = 'IDLE'
+    PROC = 'PROC'
+    distruct_time = float("inf")
+    model_name = 'osc_model'    
+    
 class EmissionModelConfig():
     PROC = 'PROC'
     IDLE = 'IDLE'

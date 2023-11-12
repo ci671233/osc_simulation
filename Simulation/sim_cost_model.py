@@ -3,8 +3,8 @@ import json
 from config import *
 
 class CostModel(BehaviorModelExecutor):
-    def __init__(self, instantiate_time, destruct_time, name, engine_name, engine):
-        BehaviorModelExecutor.__init__(instantiate_time, destruct_time, name, engine_name)
+    def __init__(self, instance_time, destruct_time, name, engine_name, engine):
+        BehaviorModelExecutor.__init__(self, instance_time, destruct_time, name, engine_name)
         
         self.engine = engine
         
@@ -16,24 +16,31 @@ class CostModel(BehaviorModelExecutor):
         self.insert_output_port("process_out")
     
     def ext_trans(self, port, msg):
-        data = msg.retrieve()
-        print(data)
-        
-        pass
+        if port == "process_in":
+            data = msg.retrieve()
+            print(f"[COST MODEL : ]{data}")
+            self._cur_state = EmissionModelConfig.PROC
 
     # Internal Transition
     
     def int_trans(self):
-        pass
+        if self._cur_state == EmissionModelConfig.IDLE:
+            self._cur_state = EmissionModelConfig.IDLE
+            
+        elif self._cur_state == EmissionModelConfig.PROC:
+            self._cur_state = EmissionModelConfig.IDLE
+                
 
     # Output Function
     
     def output(self):
+        if self._cur_state == EmissionModelConfig.PROC:
+            message = SysMessage(self.get_name(), "process_out")
+            message.insert("hello from cost!")
+            return message
         
-        message = SysMessage(self.get_name(), "process_out")
-        message.insert("hello from cost")
-        return message
-        
+        elif self._cur_state == EmissionModelConfig.IDLE:
+            pass
 
 # # 비용 계산 함수
 # def calculate_construction_cost(area, material_cost, labor_cost, additional_cost):
