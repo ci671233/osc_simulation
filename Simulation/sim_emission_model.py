@@ -8,6 +8,8 @@ class EmissionModel(BehaviorModelExecutor):
         
         self.engine = engine
         
+        self.cnt = 0
+        
         self.init_state(EmissionModelConfig.IDLE)
         self.insert_state(EmissionModelConfig.IDLE, Infinite)
         self.insert_state(EmissionModelConfig.PROC, 1)
@@ -24,6 +26,17 @@ class EmissionModel(BehaviorModelExecutor):
             data = msg.retrieve()
             print(f"[EMISSION MODEL] : {data}")
             self._cur_state = EmissionModelConfig.PROC
+            
+            if data[0] == 'A' : 
+                self.x = data[0:]
+                self.cnt += 1
+            
+            elif data[0] == 'B':
+                self.y = data[0:]
+                
+            
+            if self.cnt == 2:
+                self.cal(self.x)
         
 
     # Internal Transition
@@ -51,6 +64,9 @@ class EmissionModel(BehaviorModelExecutor):
         elif self._cur_state == EmissionModelConfig.IDLE:
             pass
     
+    def cal(self, x, y):
+        if x > y : return True
+        else : return False
     
 # # GHG 배출 계수 및 기타 상수 (논문에서 제공된 값 사용)
 # ghg_electricity_factor = {'North': 0.9803, 'East': 0.8367, 'South': 0.9489, 'Middle': 1.0297, 'Northeast': 1.0852, 'Northwest': 1.0001}

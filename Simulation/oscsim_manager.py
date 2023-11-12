@@ -27,10 +27,10 @@ class OscSim():
         self.oscsim_engine.register_entity(osc_model)
         
         self.oscsim_engine.coupling_relation(None, OscSimConfig.cal_start, emission_model, OscSimConfig.cal_start)
-        self.oscsim_engine.coupling_relation(emission_model, "process_out", cost_model, "process_in")
-        self.oscsim_engine.coupling_relation(emission_model, "process_out", osc_model, "process_in")
-        self.oscsim_engine.coupling_relation(cost_model, "process_out", emission_model, "process_in")
+        self.oscsim_engine.coupling_relation(osc_model, "process_out", cost_model, "process_in")
         self.oscsim_engine.coupling_relation(osc_model, "process_out", emission_model, "process_in")
+        self.oscsim_engine.coupling_relation(cost_model, "process_out", emission_model, "process_in")
+        self.oscsim_engine.coupling_relation(emission_model, "process_out", osc_model, "process_in")
         # self.oscsim_engine.coupling_relation(emission_model, "process_out", cost_model, "process_in")
         
         
