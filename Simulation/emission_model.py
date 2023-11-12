@@ -1,4 +1,4 @@
-from pyevsim import BehaviorModelExecutor, Infinite
+from pyevsim import BehaviorModelExecutor, Infinite, SysMessage
 from config import *
 import time
 
@@ -12,10 +12,36 @@ class EmissionModel(BehaviorModelExecutor):
         self.insert_state(EmissionModelConfig.IDLE, Infinite)
         self.insert_state(EmissionModelConfig.PROC, 1)
         
-        self.insert_input_port()
-
+        self.insert_input_port("process_in")
+        self.insert_output_port("process_out")
+    
     def ext_trans(self, port, msg):
-        if 
+        data = msg.retrieve()
+        print(data)
+        
+        if port == "process_in":
+            self._cur_state = EmissionModelConfig.PROC
+        
+
+    # Internal Transition
+    
+    def int_trans(self):
+        if self._cur_state == EmissionModelConfig.IDLE:
+            self._cur_state = EmissionModelConfig.IDLE
+            
+        elif self._cur_state == EmissionModelConfig.PROC:
+            self._cur_state = EmissionModelConfig.PROC
+            
+
+    # Output Function
+    
+    def output(self):
+        
+        message = SysMessage(self.get_name(), "process_out")
+        message.insert("Test1")
+        
+        return message
+    
     
 # GHG 배출 계수 및 기타 상수 (논문에서 제공된 값 사용)
 ghg_electricity_factor = {'North': 0.9803, 'East': 0.8367, 'South': 0.9489, 'Middle': 1.0297, 'Northeast': 1.0852, 'Northwest': 1.0001}

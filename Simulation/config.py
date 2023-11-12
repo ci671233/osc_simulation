@@ -9,15 +9,15 @@ class OscSimConfig():
     cal_start = 'calculator_start'
     IDLE = 'IDLE'
     
-    distruct_time = 'infinite'
+    distruct_time = float("inf")
     
 class CostModelConfig():
     IDLE = 'IDLE'
-    distruct_time = 'infinite'
+    distruct_time = float("inf")
     model_name = 'cost_model'
     
 class EmissionModelConfig():
     PROC = 'PROC'
     IDLE = 'IDLE'
-    distruct_time = 'infinite'
+    distruct_time = float("inf")
     model_name = 'emission_model'
