@@ -1,10 +1,10 @@
 # SimulationSetup.py
-from pyevsim import SystemSimulator, Infinite
+from pyevsim import SystemSimulator, Infinite, SysMessage
 from EmissionModel import EmissionModel
 
 def setup_simulation():
     ss = SystemSimulator()
-    ss.register_engine("osc_engine", "REAL_TIME", 1)
+    ss.register_engine("osc_engine", "REAL_TIME", 60)
 
     # E1 모델 파라미터 설정 (논문 참조)
     emission_factors_e1 = [(100, 0.25, 0.05), (150, 0.35, 0.02)]
@@ -32,8 +32,26 @@ def setup_simulation():
     e5_model = EmissionModel(0, Infinite, "E5", "osc_engine", emission_factors_e5)
     ss.get_engine("osc_engine").register_entity(e5_model)
 
+    # 모델 활성화를 위한 초기 메시지 보내기
+    for model_name in ["E1", "E2", "E3", "E4", "E5"]:
+        init_msg = SysMessage(model_name, "")
+        init_msg.insert("start")
+        ss.get_engine("osc_engine").insert_external_event(model_name, "start", init_msg)
+
     return ss
+
+def calculate_total_emission(ss):
+    total_emission = 0
+    for model_name in ["E1", "E2", "E3", "E4", "E5"]:
+        model = ss.get_engine("osc_engine").get_entity(model_name)
+        emission = model.output()
+        print(f"Emission from {model_name}: {emission}")  # 각 모델의 배출량 출력
+        total_emission += emission
+    return total_emission
 
 def run_simulation():
     ss = setup_simulation()
     ss.get_engine("osc_engine").simulate()
+
+    total_emission = calculate_total_emission(ss)
+    print(f"Total Emission: {total_emission}")  # 총 배출량 출력

@@ -7,14 +7,20 @@ class EmissionModel(BehaviorModelExecutor):
         self.emission_factors = emission_factors
         self.init_state("IDLE")
         self.insert_state("IDLE", Infinite)
+        self.insert_input_port("start")
 
     def ext_trans(self, port, msg):
-        pass  # 외부 전이 로직 구현
+        print(f"External transition in {self.get_name()}")
+        if port == "start":
+            self._cur_state = "ACTIVE"
 
     def int_trans(self):
-        pass  # 내부 전이 로직 구현
+        print(f"Internal transition in {self.get_name()}")
+        if self._cur_state == "ACTIVE":
+            self._cur_state = "IDLE"
 
     def output(self):
+        print(f"Calculating emissions for model {self.get_name()}")  # 진행 상황 출력
         # 온실가스 배출량 계산
         if self.get_name() == "E1":
             # 자재 온실가스 배출 모델(E1) 계산 로직

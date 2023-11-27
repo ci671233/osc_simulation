@@ -1,3 +1,4 @@
+#definition.py
 from enum import Enum
 
 Infinite = float("inf")

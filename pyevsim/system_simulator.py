@@ -28,3 +28,10 @@ class SystemSimulator(object):
     def block(self):
         for t in self.thread_list:
             t.join(1)
+            
+    def insert_external_event(self, model_name, port_name, event):
+        if model_name in self.active_obj_map:
+            model = self.active_obj_map[model_name]
+            model.ext_trans(port_name, event)
+        else:
+            print(f"[ERROR] Model '{model_name}' not found")
