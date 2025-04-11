@@ -24,7 +24,7 @@
 | **E3** | 폐기물 온실가스 배출 모델 |
 | **E4** | 조립식 부품 온실가스 배출 모델 |
 | **E5** | 장비 및 기술 온실가스 배출 모델 |
-<img width="247" alt="image" src="https://github.com/user-attachments/assets/de238880-d7de-4f3b-9696-16e0fb85673d" />
+<img width="558" alt="image" src="https://github.com/user-attachments/assets/de238880-d7de-4f3b-9696-16e0fb85673d" />
 
 
 <img width="558" alt="image" src="https://github.com/user-attachments/assets/e64bae8f-e23b-434d-9525-a842f828d100" />
