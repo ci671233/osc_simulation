@@ -14,7 +14,8 @@
 ## 시스템 모델 개요
 - DEVS 형식론
 - 동작을 표현한 원자모델(Atomic model)과 모델들의 결합으로 이루어진 결합모델(Coupled model)로 구성
-<img width="758" alt="image" src="https://github.com/user-attachments/assets/032b9a8a-4f3e-4c1b-8582-422a3ff4a66b" />
+<img width="548" alt="image" src="https://github.com/user-attachments/assets/70cb7a80-4de2-4f1f-99a4-b846737334e6" />
+
 
 | 모델명 | 설명 |
 |--------|------|
@@ -23,7 +24,8 @@
 | **E3** | 폐기물 온실가스 배출 모델 |
 | **E4** | 조립식 부품 온실가스 배출 모델 |
 | **E5** | 장비 및 기술 온실가스 배출 모델 |
-<img width="372" alt="image" src="https://github.com/user-attachments/assets/dd47f52d-8399-461b-a0c9-9e3b4909af8c" />
+<img width="247" alt="image" src="https://github.com/user-attachments/assets/de238880-d7de-4f3b-9696-16e0fb85673d" />
+
 
 <img width="558" alt="image" src="https://github.com/user-attachments/assets/e64bae8f-e23b-434d-9525-a842f828d100" />
 
